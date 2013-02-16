@@ -1,6 +1,11 @@
 package com.bva.infinit;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.Locale;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 import android.os.Bundle;
@@ -16,7 +21,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.bva.etracks.ETracksAPI;
+import com.bva.etracks.EtracksMix;
 
 public class Browse extends FragmentActivity {
 
@@ -46,7 +55,7 @@ public class Browse extends FragmentActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager = (ViewPager) findViewById(R.id.mainPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
     }
@@ -75,9 +84,13 @@ public class Browse extends FragmentActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a DummySectionFragment (defined as a static inner class
             // below) with the page number as its lone argument.
-            Fragment fragment = new DummySectionFragment();
+            if(position == 1)
+            	return new BrowseMixesFragment();
+            
+        	
+        	Fragment fragment = new TestSectionFragment();
             Bundle args = new Bundle();
-            args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+            args.putInt(TestSectionFragment.ARG_SECTION_NUMBER, position + 1);
             fragment.setArguments(args);
             return fragment;
         }
@@ -85,7 +98,7 @@ public class Browse extends FragmentActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -107,24 +120,42 @@ public class Browse extends FragmentActivity {
      * A dummy fragment representing a section of the app, but that simply
      * displays dummy text.
      */
-    public static class DummySectionFragment extends Fragment {
+    public static class TestSectionFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
         public static final String ARG_SECTION_NUMBER = "section_number";
 
-        public DummySectionFragment() {
+        public TestSectionFragment() {
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_browse_dummy, container, false);
-            TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
-            dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            //TextView dummyTextView = (TextView) rootView.findViewById(R.id.section_label);
+            //dummyTextView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+            Button testButton = (Button) rootView.findViewById(R.id.testbutton);
+            testButton.setText("TESTBUTTON");
             return rootView;
         }
+    }
+    
+    public static class BrowseMixesFragment extends Fragment {
+    	
+    	public BrowseMixesFragment(){
+
+    	}
+    	
+    	@Override
+    	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    		
+    		View rootView = inflater.inflate(R.layout.fragment_browse_mixes, container, false);
+    		Button testButton = (Button) rootView.findViewById(R.id.button1);
+    		    		
+    		return rootView;
+    	}
     }
 
 }
