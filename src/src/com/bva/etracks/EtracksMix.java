@@ -2,17 +2,13 @@ package com.bva.etracks;
 
 //Follows 8tracks api naming scheme
 
-public class EtracksMix {
-
-	
-public String smart_id;
+public class ETracksMix {
+/*public String smart_id;
 public String status;
 public int errors;
 public int notices;	
-public EtracksChildMix childMix = new EtracksChildMix();
+public ETracksChildMix childMix = new ETracksChildMix();*/
 
-	public class EtracksChildMix {
-		
 		public int id;
 		public String name;
 		public String description;
@@ -35,5 +31,4 @@ public EtracksChildMix childMix = new EtracksChildMix();
 			String avatar_url;
 			Boolean followed_by_current_user;	
 		}
-	}
 }

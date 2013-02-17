@@ -1,14 +1,15 @@
 package com.bva.infinit.test;
 
+import java.util.ArrayList;
+
 import junit.framework.TestCase;
 
 //import com.bva.etracks.EtracksJSON;
 import com.bva.etracks.ETracksAPI;
-import com.bva.etracks.EtracksMix;
+import com.bva.etracks.ETracksMix;
+import com.bva.etracks.ETracksQueryResponse;
 
 public class ETracksAPITest extends TestCase {
-
-	ETracksAPI etj;
 	
 	public ETracksAPITest(String name) {
 		super(name);
@@ -16,7 +17,6 @@ public class ETracksAPITest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		etj = new ETracksAPI();
 	}
 
 	protected void tearDown() throws Exception {
@@ -24,7 +24,21 @@ public class ETracksAPITest extends TestCase {
 	}
 
 	public final void testGetNextMix_valid() {
-		EtracksMix mix = etj.GetNextMix(2000);
-		assertFalse(mix.childMix.id == -1);
+		ETracksMix mix = ETracksAPI.GetNextMix(1234);
+		assertFalse(mix.id == -1);
+	}
+	
+	public final void testSearchMixes_valid() {
+		ArrayList<ETracksMix> mixes = new ArrayList<ETracksMix>();
+		
+		mixes = ETracksAPI.SearchMixes("chillstep").mixes;
+		
+		assertTrue(mixes.size() > 0);
+	}
+	
+	public final void testNextPage_valid() {		
+		ETracksQueryResponse response = ETracksAPI.NextPage(ETracksAPI.SearchMixes("chillstep"));
+		
+		assertTrue(response.mixes.size() > 0);
 	}
 }
