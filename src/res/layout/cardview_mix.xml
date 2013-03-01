@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardlayout"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_gravity="center_horizontal"
+    android:gravity="fill" >
+
+	<ImageView
+	    android:id="@+id/mixImage"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentTop="true"
+	    android:scaleType="centerCrop"
+	    android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/mixName"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_above="@+id/cardlayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="false"
+        android:background="@color/transparent_dark_grey"
+        android:gravity="top|center_horizontal"
+        android:shadowColor="@color/actionbar_dark_grey"
+        android:shadowRadius="3"
+        android:text="MIX MIX MIX MIX MIX MIX"
+        android:textColor="@color/White"
+        android:textSize="20sp" />
+    
+</RelativeLayout>

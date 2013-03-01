@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainGrid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="1" >
+    android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_column="0"
+    <GridView
+        android:id="@+id/mixesGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="left|top"
-        android:layout_row="0"
-        android:text="Button" />
+        android:numColumns="auto_fit"
+        android:verticalSpacing="3dp"
+        android:horizontalSpacing="3dp">
+    </GridView>
 
-</GridLayout>
+    <ProgressBar
+        android:id="@+id/mixesProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center|center_horizontal"
+        android:indeterminate="true"
+        android:max="100"
+        android:progress="0" />
+
+</RelativeLayout>

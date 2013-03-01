@@ -33,12 +33,22 @@ public class ETracksAPITest extends TestCase {
 		
 		mixes = ETracksAPI.SearchMixes("chillstep").mixes;
 		
-		assertTrue(mixes.size() > 0);
+		assertTrue(!mixes.isEmpty());
+	}
+	
+	public final void testSearchMixesByTag_valid() {
+		ArrayList<ETracksMix> mixes = new ArrayList<ETracksMix>();
+		
+		mixes = ETracksAPI.SearchMixesByTag("chill").mixes;
+		
+		assertTrue(!mixes.isEmpty());		
 	}
 	
 	public final void testNextPage_valid() {		
 		ETracksQueryResponse response = ETracksAPI.NextPage(ETracksAPI.SearchMixes("chillstep"));
 		
-		assertTrue(response.mixes.size() > 0);
+		assertTrue(!response.mixes.isEmpty());
 	}
+	
+	
 }

@@ -18,5 +18,5 @@ public class ETracksQueryResponse {
 	public String name;
 	public String smart_id;
 	
-	public ArrayList<ETracksMix> mixes;
+	public ArrayList<ETracksMix> mixes = new ArrayList<ETracksMix>();
 }

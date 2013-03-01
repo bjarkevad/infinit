@@ -8,5 +8,10 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_now_playing">NowPlayingActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_browsemixes">New</string>
+    <string name="title_searchmixes">Search</string>
+    <string name="title_listeninghistory">History</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_activity_browse">BrowseActivity</string>
 
 </resources>

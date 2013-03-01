@@ -1,16 +1,24 @@
 package com.bva.infinit;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
+import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.app.SlidingFragmentActivity;
+
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.TypedValue;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class Browse extends FragmentActivity {
+public class Browse extends SlidingFragmentActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -28,19 +36,56 @@ public class Browse extends FragmentActivity {
     ViewPager mViewPager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);         
         setContentView(R.layout.activity_browse);
-
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the app.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
+        
+        //SlidingMenu
+        setBehindContentView(R.layout.slidingmenu_navigation);
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 270, r.getDisplayMetrics());
+        getSlidingMenu().setBehindWidth((int) px);
+        setSlidingActionBarEnabled(false);
+        getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        //
+        
+        //Testing ListView
+        ListView lv = (ListView)findViewById(R.id.slidingmenu_navigation_listview);
+        ArrayList<String> menuItems = new ArrayList<String>();
+        menuItems.add("TEST");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menuItems);
+        lv.setAdapter(arrayAdapter);
+        lv.setBackgroundColor(getResources().getColor(R.color.actionbar_dark_grey));
+        //
+        
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());        
         mViewPager = (ViewPager) findViewById(R.id.mainPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int index) {
+				// TODO Auto-generated method stub
+				switch (index) {
+					case 0:
+						getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+						break;
+					default:
+						getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+						break;
+				}
+			}
+			
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub				
+			}
+			
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub				
+			}
+		});
     }
 
     @Override
@@ -48,8 +93,7 @@ public class Browse extends FragmentActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.browse, menu);
         return true;
-    }
-    
+    } 
     
 
     /**
@@ -57,19 +101,21 @@ public class Browse extends FragmentActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
+    	
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a DummySectionFragment (defined as a static inner class
-            // below) with the page number as its lone argument.
-            //if(position == 1)
-        	return new BrowseMixesFragment();
-            
+        	
+        	switch(position) {
+        		case 3:
+        			return new BrowseMixesFragment();
+        			
+        		default:
+        			return new BrowseMixesFragment();
+        	}
         	
         	/*Fragment fragment = new TestSectionFragment();
             Bundle args = new Bundle();
@@ -80,19 +126,21 @@ public class Browse extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
             switch (position) {
-                case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
+            	case 0:
+            		return getString(R.string.title_searchmixes).toUpperCase(l);
                 case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
+                    return getString(R.string.title_favorites).toUpperCase(l);
                 case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
+                    return getString(R.string.title_listeninghistory).toUpperCase(l);
+                case 3:
+                    return getString(R.string.title_browsemixes).toUpperCase(l);
             }
             return null;
         }
