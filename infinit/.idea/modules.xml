@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/infinit.iml" filepath="$PROJECT_DIR$/infinit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../android/slidingmenu/slidingmenu.iml" filepath="$PROJECT_DIR$/../android/slidingmenu/slidingmenu.iml" />
+    </modules>
+  </component>
+</project>
+
